@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quote of the Day</title>
+    <style>
+      /* Center the quote and author text */
+      #quote-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      /* Style the quote text */
+      #quote-text {
+        font-size: 2rem;
+        font-style: italic;
+        margin-bottom: 1rem;
+      }
+
+      /* Style the author text */
+      #author-text {
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="quote-container">
+      <p id="quote-text"></p>
+      <p id="author-text"></p>
+    </div>
+
+    <script>
+      // Function to get a new quote from the Quotes REST API and update the page
+      function getNewQuote() {
+        fetch("https://quotes.rest/qod?category=inspire")
+          .then(response => response.json())
+          .then(data => {
+            // Get the quote and author text elements
+            const quoteElement = document.getElementById("quote-text");
+            const authorElement = document.getElementById("author-text");
+
+            // Set the inner HTML of the quote and author text elements
+            const quoteText = data.contents.quotes[0].quote;
+            const authorText = data.contents.quotes[0].author;
+            quoteElement.innerHTML = quoteText;
+            authorElement.innerHTML = `— ${authorText}`;
+          })
+          .catch(error => console.error(error));
+      }
+
+      // Call the getNewQuote function when the page loads and refreshes
+      window.onload = getNewQuote;
+      window.onbeforeunload = function() {
+        window.scrollTo(0, 0);
+      };
+      window.onunload = function() {
+        // Prevent the page from being cached so that a new quote is always fetched
+        window.location.reload(true);
+      };
+    </script>
+  </body>
+</html>
