@@ -43,6 +43,16 @@
       #new-quote-button:hover {
         background-color: #00796b;
       }
+
+      /* Style the footer */
+      footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #f5f5f5;
+        padding: 1rem;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -51,6 +61,10 @@
       <p id="author-text"></p>
       <button id="new-quote-button">New Quote</button>
     </div>
+
+    <footer>
+      <p id="time"></p>
+    </footer>
 
     <script>
       // Function to get a new quote from the type.fit API and update the page
@@ -89,6 +103,14 @@
 
       // Refresh the quote every minute
       setInterval(getNewQuote, 60000);
+
+      // Function to display the current time and date
+      function displayTime() {
+        const date = new Date();
+        const timeElement = document.getElementById("time");
+        timeElement.innerHTML = date.toLocaleString();
+      }
+
+      // Call the displayTime function every second to update the time
+      setInterval(displayTime, 1000);
     </script>
-  </body>
-</html>
