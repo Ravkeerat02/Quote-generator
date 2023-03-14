@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Quote of the Day</title>
+    <title>Quote of the Minute</title>
     <style>
       /* Center the quote and author text */
       #quote-container {
@@ -17,6 +17,8 @@
         font-size: 2rem;
         font-style: italic;
         margin-bottom: 1rem;
+        text-align: center;
+        max-width: 80%;
       }
 
       /* Style the author text */
@@ -24,6 +26,22 @@
         font-size: 1rem;
         font-weight: bold;
         text-align: center;
+        max-width: 80%;
+      }
+
+      /* Style the button */
+      #new-quote-button {
+        padding: 1rem;
+        background-color: #009688;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 2rem;
+      }
+
+      #new-quote-button:hover {
+        background-color: #00796b;
       }
     </style>
   </head>
@@ -31,36 +49,46 @@
     <div id="quote-container">
       <p id="quote-text"></p>
       <p id="author-text"></p>
+      <button id="new-quote-button">New Quote</button>
     </div>
 
     <script>
-      // Function to get a new quote from the Quotes REST API and update the page
+      // Function to get a new quote from the type.fit API and update the page
       function getNewQuote() {
-        fetch("https://quotes.rest/qod?category=inspire")
-          .then(response => response.json())
-          .then(data => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://type.fit/api/quotes");
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+            // Get a random quote from the response data
+            const randomIndex = Math.floor(Math.random() * data.length);
+            const quoteData = data[randomIndex];
+
             // Get the quote and author text elements
             const quoteElement = document.getElementById("quote-text");
             const authorElement = document.getElementById("author-text");
 
             // Set the inner HTML of the quote and author text elements
-            const quoteText = data.contents.quotes[0].quote;
-            const authorText = data.contents.quotes[0].author;
+            const quoteText = quoteData.text;
+            const authorText = quoteData.author || "Unknown";
             quoteElement.innerHTML = quoteText;
             authorElement.innerHTML = `— ${authorText}`;
-          })
-          .catch(error => console.error(error));
+          } else {
+            console.error(xhr.statusText);
+          }
+        };
+        xhr.onerror = function() {
+          console.error("An error occurred while fetching the quote.");
+        };
+        xhr.send();
       }
 
-      // Call the getNewQuote function when the page loads and refreshes
+      // Call the getNewQuote function when the page loads and when the "New Quote" button is clicked
       window.onload = getNewQuote;
-      window.onbeforeunload = function() {
-        window.scrollTo(0, 0);
-      };
-      window.onunload = function() {
-        // Prevent the page from being cached so that a new quote is always fetched
-        window.location.reload(true);
-      };
+      document.getElementById("new-quote-button").addEventListener("click", getNewQuote);
+
+      // Refresh the quote every minute
+      setInterval(getNewQuote, 60000);
     </script>
   </body>
 </html>
