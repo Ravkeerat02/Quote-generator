@@ -1,48 +1,65 @@
-
-      
-function getNewQuote() {
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", "https://api.quotable.io/random");
-  xhr.setRequestHeader("X-TheySaidSo-Api-Secret", "DsbrIjHjP3WtHVYXBcjxbF1ai-QysPNS8W2MFmFojbo"); // replace with your API key
-  xhr.onload = function() {
-if (xhr.status === 200) {
-  const data = JSON.parse(xhr.responseText);
-  const quoteElement = document.getElementById("quote-text");
-  const authorElement = document.getElementById("author-text");
-  const authorImageElement = document.getElementById("author-image");
-  const quoteText = data.content;
-  const authorText = data.author;
-  const authorImageUrl = `https://picsum.photos/200?random=${Math.floor(Math.random() * 100)}`;
-  quoteElement.innerHTML = quoteText;
-  authorElement.innerHTML = authorText;
-  authorImageElement.src = authorImageUrl;
-} else {
-  console.error(xhr.statusText);
-}
-};
-xhr.onerror = function() {
-console.error("An error occurred while fetching the quote.");
-};
-xhr.send();
-}
-
-
-
-
-
-// Call the getNewQuote function when the page loads and when the "New Quote" button is clicked
-window.onload = getNewQuote;
-document.getElementById("new-quote-button").addEventListener("click", getNewQuote);
-
-// Refresh the quote every minute
-setInterval(getNewQuote, 60000);
-
-// Function to display the current time and date
-function displayTime() {
-  const date = new Date();
-  const timeElement = document.getElementById("time");
-  timeElement.innerHTML = date.toLocaleString();
-}
-
-// Call the displayTime function every second to update the time
-setInterval(displayTime, 1000);
+// Retrieve a new quote from the API
+async function getNewQuote() {
+    const response = await fetch("https://api.quotable.io/random");
+    const data = await response.json();
+    return data;
+  }
+  
+  // Generate a new quote and display it on the page
+  async function generateQuote() {
+    const { content, author } = await getNewQuote();
+    document.getElementById("quote-text").textContent = content;
+    document.getElementById("author-text").textContent = `- ${author}`;
+    document.getElementById("speak-quote-button").disabled = false;
+  }
+  
+  // Speak the current quote using the Web Speech API
+  function speakQuote() {
+    const textToSpeak = document.getElementById("quote-text").textContent;
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    speechSynthesis.speak(utterance);
+  }
+  
+  // Share the current quote on Twitter
+  function shareQuote() {
+    const quoteText = encodeURIComponent(document.getElementById("quote-text").textContent);
+    const authorText = encodeURIComponent(document.getElementById("author-text").textContent);
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText}${authorText}&hashtags=QuoteOfTheMinute`;
+    window.open(twitterUrl, "_blank");
+  }
+  
+  // Display the current time in the footer
+  function displayTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    document.getElementById("time").textContent = `Current time: ${timeString}`;
+  }
+  
+  // Add event listeners to buttons
+  document.getElementById("new-quote-button").addEventListener("click", generateQuote);
+  document.getElementById("speak-quote-button").addEventListener("click", speakQuote);
+  document.getElementById("share-quote-button").addEventListener("click", shareQuote);
+  
+  // Generate an initial quote and display the current time
+  generateQuote();
+  displayTime();
+  setInterval(displayTime, 1000); // Update the time every second
+  
+  // Display quote in a box
+  const quoteBox = document.getElementById("quote-box");
+  quoteBox.addEventListener("click", function() {
+    quoteBox.classList.toggle("box-open");
+  });
+  
+  // Generate a new quote when clicking the refresh button
+  const refreshButton = document.getElementById("refresh-button");
+  refreshButton.addEventListener("click", function() {
+    generateQuote();
+  });
+  
+  // Add event listener to the share button
+  const shareButton = document.getElementById("share-button");
+  shareButton.addEventListener("click", function() {
+    shareQuote();
+  });
+  
