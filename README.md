@@ -7,4 +7,5 @@
 
 Add authors pictures. along with the details in caption 
 improve styling 
+add copyright 
 
