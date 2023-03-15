@@ -15,7 +15,7 @@ async function getNewQuote() {
   
   // Speak the current quote using the Web Speech API
   function speakQuote() {
-    const textToSpeak = document.getElementById("quote-text").textContent;
+    const textToSpeak = `${document.getElementById("quote-text").textContent} by ${document.getElementById("author-text").textContent}`
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
     speechSynthesis.speak(utterance);
   }
