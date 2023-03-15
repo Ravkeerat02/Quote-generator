@@ -9,6 +9,10 @@ Add authors pictures. along with the details in caption
 improve styling 
 <br>
 add copyright 
-<br>
+<br><br>
 ![Enhancement](https://youtu.be/I0v9ZOY3_0k)
+<br><br>
+display it in a box . which also speaks the code when clicked on the speaker btn . along with that gives an n option to share or generate a new quote
+<br><br>
+translate the quote to a different lamguage have it appear the same way
 
