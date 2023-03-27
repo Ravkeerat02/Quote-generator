@@ -55,3 +55,22 @@ function speakQuote() {
   speechSynthesis.speak(utterance);
 }
 
+// Function to display the current time 
+function displayTime() {
+  const date = new Date();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+// function to display the quote
+function displayQuoteOfDay() {
+  quoteOfDayText.textContent = currentQuoteOfDay;
+  quoteOfDayAuthor.textContent = currentAuthorOfDay;
+
+}
+//fucntion to get the quote of the day
+async function getQuoteOfDay() {
+  
+}
