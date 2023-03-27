@@ -62,4 +62,31 @@ async function getNewQuote() {
   shareButton.addEventListener("click", function() {
     shareQuote();
   });
+
+  //toggle functionality to change the theme 
+  let isDarkTheme = false;
+
+  // Set the initial theme based on the user's preference (if it exists)
+  if (localStorage.getItem("theme") === "dark") {
+    toggleTheme();
+  }else{
+    isDarkTheme = false;
+  }
+
+  themeToggle.addEventListener("change", toggleTheme);
+
+  //create a function which will help 
+  function toggleTheme(){
+    if (isDarkTheme) {
+      document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
+      isDarkTheme = false;
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
+      isDarkTheme = true;
+    }
+  }
+
+  
   
