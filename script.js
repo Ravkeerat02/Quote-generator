@@ -64,29 +64,18 @@ async function getNewQuote() {
   });
 
   //toggle functionality to change the theme 
-  let isDarkTheme = false;
-
-  // Set the initial theme based on the user's preference (if it exists)
-  if (localStorage.getItem("theme") === "dark") {
-    toggleTheme();
-  }else{
-    isDarkTheme = false;
+  const body = document.body;
+  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+  
+  function switchTheme(e) {
+      if (e.target.checked) {
+          body.classList.add('dark-mode');
+      } else {
+          body.classList.remove('dark-mode');
+      }    
   }
-
-  themeToggle.addEventListener("change", toggleTheme);
-
-  //create a function which will help 
-  function toggleTheme(){
-    if (isDarkTheme) {
-      document.documentElement.setAttribute("data-theme", "light");
-      localStorage.setItem("theme", "light");
-      isDarkTheme = false;
-    } else {
-      document.documentElement.setAttribute("data-theme", "dark");
-      localStorage.setItem("theme", "dark");
-      isDarkTheme = true;
-    }
-  }
+  
+  toggleSwitch.addEventListener('change', switchTheme, false);
 
   
   
