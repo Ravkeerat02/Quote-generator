@@ -1,65 +1,57 @@
-// Retrieve a new quote from the API
-async function getNewQuote() {
-    const response = await fetch("https://api.quotable.io/random");
+// DOM elements
+const quoteText = document.getElementById('quote-text');
+const authorText = document.getElementById('author-text');
+const authorImage = document.getElementById('author-image');
+const speakQuoteButton = document.getElementById('speak-quote-button');
+const newQuoteButton = document.getElementById('new-quote-button');
+const shareQuoteButton = document.getElementById('share-quote-button');
+const searchInput = document.getElementById('search-input');
+const searchButton = document.getElementById('search-button');
+const quoteOfDayText = document.getElementById('quote-of-day-text');
+const quoteOfDayAuthor = document.getElementById('quote-of-day-author');
+const quoteOfDayButton = document.getElementById('quote-of-day-button');
+const timeElement = document.getElementById('time');
+
+// Speech synthesis
+const synth = window.speechSynthesis;
+
+// Default settings
+let currentQuote = '';
+let currentAuthor = '';
+let currentImage = '';
+let currentQuoteOfDay = '';
+let currentAuthorOfDay = '';
+
+// Function to get a random quote from the API
+async function getQuote() {
+  const apiUrl = 'https://api.quotable.io/random';
+  try {
+    const response = await fetch(apiUrl);
     const data = await response.json();
-    return data;
+    if (response.ok) {
+      currentQuote = data.content;
+      currentAuthor = data.author;
+      currentImage = `https://picsum.photos/seed/${currentAuthor}/300`;
+      renderQuote(currentQuote, currentAuthor, currentImage);
+    } else {
+      throw new Error('Error getting quote.');
+    }
+  } catch (error) {
+    console.log(error);
   }
-  
-  // Generate a new quote and display it on the page
-  async function generateQuote() {
-    const { content, author } = await getNewQuote();
-    document.getElementById("quote-text").textContent = content;
-    document.getElementById("author-text").textContent = `- ${author}`;
-    document.getElementById("speak-quote-button").disabled = false;
-  }
-  
-  // Speak the current quote using the Web Speech API
-  function speakQuote() {
-    const textToSpeak = `${document.getElementById("quote-text").textContent} by ${document.getElementById("author-text").textContent}`
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    speechSynthesis.speak(utterance);
-  }
-  
-  // Share the current quote on Twitter
-  function shareQuote() {
-    const quoteText = encodeURIComponent(document.getElementById("quote-text").textContent);
-    const authorText = encodeURIComponent(document.getElementById("author-text").textContent);
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText}${authorText}&hashtags=QuoteOfTheMinute`;
-    window.open(twitterUrl, "_blank");
-  }
-  
-  // Display the current time in the footer
-  function displayTime() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-    document.getElementById("time").textContent = `Current time: ${timeString}`;
-  }
-  
-  // Add event listeners to buttons
-  document.getElementById("new-quote-button").addEventListener("click", generateQuote);
-  document.getElementById("speak-quote-button").addEventListener("click", speakQuote);
-  document.getElementById("share-quote-button").addEventListener("click", shareQuote);
-  
-  // Generate an initial quote and display the current time
-  generateQuote();
-  displayTime();
-  setInterval(displayTime, 1000); // Update the time every second
-  
-  // Display quote in a box
-  const quoteBox = document.getElementById("quote-box");
-  quoteBox.addEventListener("click", function() {
-    quoteBox.classList.toggle("box-open");
-  });
-  
-  // Generate a new quote when clicking the refresh button
-  const refreshButton = document.getElementById("refresh-button");
-  refreshButton.addEventListener("click", function() {
-    generateQuote();
-  });
-  
-  // Add event listener to the share button
-  const shareButton = document.getElementById("share-button");
-  shareButton.addEventListener("click", function() {
-    shareQuote();
-  });
-  
+}
+
+// Function to render the current quote and author
+function renderQuote(quote, author, image) {
+  quoteText.textContent = quote;
+  authorText.textContent = `- ${author}`;
+  authorImage.setAttribute('src', image);
+}
+
+// Speak the current quote using the Web Speech API
+function speakQuote() {
+  const textToSpeak = `${document.getElementById("quote-text").textContent} by ${document.getElementById("author-text").textContent}`
+  const utterance = new SpeechSynthesisUtterance(textToSpeak);
+  speechSynthesis.speak(utterance);
+}
+

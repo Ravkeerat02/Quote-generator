@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Quote of the Minute</title>
+    <title>Quote of the Day</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -15,12 +15,21 @@
       <div id="button-container">
         <button id="new-quote-button" class="btn">New Quote</button>
         <button id="share-quote-button" class="btn">Share Quote</button>
+        <div id="search-container">
+          <input type="text" id="search-input" placeholder="Search quotes...">
+          <button id="search-button" class="btn">Search</button>
+        </div>
+        <div id="quote-of-day-container">
+          <p id="quote-of-day-text"></p>
+          <p id="quote-of-day-author"></p>
+          <button id="quote-of-day-button" class="btn">Quote of the Day</button>
+        </div>
       </div>
     </div>
     <hr>
-    <footer class="foot"  >
+    <footer class="foot">
       <p id="time"></p>
-      <p>Copyright &copy; Ravkeerat Singh </p>
+      <p>Created by Ravkeerat Singh</p>
     </footer>
     <script src="script.js"></script>
   </body>
