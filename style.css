@@ -1,88 +1,79 @@
-body {
-  background-color: #fff;
-  color: #000;
-}
-
-.dark {
-  background-color: #000;
-  color: #fff;
-}
-
-.toggle {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 9999;
-}
-
-.toggleSwitch {
-  display: none;
-}
-
-.switchLabel {
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  margin: 0;
-  padding: 0;
-  border: 2px solid #ccc;
-  border-radius: 34px;
-  box-sizing: border-box;
-  background-color: #fff;
-  transition: background-color 0.2s;
-}
-
-.switchLabel:after {
-  content: '';
-  display: block;
-  width: 26px;
-  height: 26px;
-  margin: 4px;
-  background: #ccc;
-  border-radius: 50%;
-  transition: margin 0.2s, background-color 0.2s;
-}
-
-.switchLabel:hover {
-  cursor: pointer;
-}
-
-.toggleSwitch:checked + .switchLabel {
-  background-color: #4CAF50;
-}
-
-.toggleSwitch:checked + .switchLabel:after {
-  margin-left: 30px;
-  background-color: #fff;
-}
-
-#quote-box {
-  margin-top: 50px;
-  text-align: center;
-}
-
 #quote-container {
-  padding: 10px;
-  margin: 0 auto;
-  max-width: 600px;
-}
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  #quote-text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  #author-text {
+    font-size: 18px;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  #author-image {
+    border-radius: 50%;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: background-color 0.2s ease-in-out;
+    text-align: center;
+  }
+  
+  button:hover {
+    background-color: #0069d9;
+  }
+  
+  #button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .btn:hover {
+    background-color: #218838;
+  }
 
-#quote-text {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-
-.btn {
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 50px;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: background-color;
-}
+  .foot{
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: center; 
+;
+  }
+  
+  
+  
