@@ -96,5 +96,8 @@ async function getNewQuote() {
     const timeString = `${hours}:${minutes}:${seconds}`;
     document.getElementById('clock').textContent = timeString;
   }
+
+  updateTime();
+
   
   setInterval(updateTime, 1000);
