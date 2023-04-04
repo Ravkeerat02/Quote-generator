@@ -88,46 +88,46 @@ async function getNewQuote() {
     digitalClockElement.textContent = `${hours}:${minutes}:${seconds}`;
   }, 1000);
   
-  // Analog Clock
-  const analogClockElement = document.getElementById('analog-clock');
-  const context = analogClockElement.getContext('2d');
-  const radius = analogClockElement.height / 2;
-  context.translate(radius, radius);
-  radius *= 0.9;
-  setInterval(() => {
-    const now = new Date();
-    const hours = now.getHours() % 12;
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
-    drawClockFace(context, radius);
-    drawHand(context, hours * 30 + minutes / 2, radius * 0.5, radius * 0.07);
-    drawHand(context, minutes * 6 + seconds / 10, radius * 0.7, radius * 0.07);
-    drawHand(context, seconds * 6, radius * 0.9, radius * 0.02);
-  }, 1000);
+  // // Analog Clock
+  // const analogClockElement = document.getElementById('analog-clock');
+  // const context = analogClockElement.getContext('2d');
+  // const radius = analogClockElement.height / 2;
+  // context.translate(radius, radius);
+  // radius *= 0.9;
+  // setInterval(() => {
+  //   const now = new Date();
+  //   const hours = now.getHours() % 12;
+  //   const minutes = now.getMinutes();
+  //   const seconds = now.getSeconds();
+  //   drawClockFace(context, radius);
+  //   drawHand(context, hours * 30 + minutes / 2, radius * 0.5, radius * 0.07);
+  //   drawHand(context, minutes * 6 + seconds / 10, radius * 0.7, radius * 0.07);
+  //   drawHand(context, seconds * 6, radius * 0.9, radius * 0.02);
+  // }, 1000);
   
-  function drawClockFace(context, radius) {
-    context.beginPath();
-    context.arc(0, 0, radius, 0, 2 * Math.PI);
-    context.fillStyle = 'white';
-    context.fill();
-    context.lineWidth = radius * 0.1;
-    context.strokeStyle = 'black';
-    context.stroke();
-    context.beginPath();
-    context.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
-    context.fillStyle = 'black';
-    context.fill();
-  }
+  // function drawClockFace(context, radius) {
+  //   context.beginPath();
+  //   context.arc(0, 0, radius, 0, 2 * Math.PI);
+  //   context.fillStyle = 'white';
+  //   context.fill();
+  //   context.lineWidth = radius * 0.1;
+  //   context.strokeStyle = 'black';
+  //   context.stroke();
+  //   context.beginPath();
+  //   context.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+  //   context.fillStyle = 'black';
+  //   context.fill();
+  // }
   
 
-  function drawHand(context, position, length, width) {
-    context.beginPath();
-    context.lineWidth = width;
-    context.lineCap = 'round';
-    context.moveTo(0, 0);
-    context.rotate(position * Math.PI / 180);
-    context.lineTo(0, -length);
-    context.stroke();
-    context.rotate(-position * Math.PI / 180);
-  }
+  // function drawHand(context, position, length, width) {
+  //   context.beginPath();
+  //   context.lineWidth = width;
+  //   context.lineCap = 'round';
+  //   context.moveTo(0, 0);
+  //   context.rotate(position * Math.PI / 180);
+  //   context.lineTo(0, -length);
+  //   context.stroke();
+  //   context.rotate(-position * Math.PI / 180);
+  // }
 
