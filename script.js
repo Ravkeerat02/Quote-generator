@@ -72,6 +72,10 @@ async function getNewQuote() {
   shareButton.addEventListener("click", function() {
     shareQuote();
   });
+
+  const canvas = document.getElementById("clock");
+  const ctx = canvas.getContext("2d");
+  drawHand(ctx, Math.PI / 2, 100, 10, "red");
   
 
   // Digital Clock
