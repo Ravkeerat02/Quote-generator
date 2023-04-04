@@ -4,6 +4,16 @@ async function getNewQuote() {
     const data = await response.json();
     return data;
   }
+
+  // Fetch a random quote from the API
+  fetch('https://api.quotable.io/random')
+  .then(response => response.json())
+  .then(data => {
+    // Display the quote of the day
+    const quoteOfTheDayElement = document.getElementById('quote-of-the-day');
+    quoteOfTheDayElement.innerHTML = `Quote of the Day: "${data.content}" - ${data.author}`;
+  })
+  .catch(error => console.error(error));
   
   // Generate a new quote and display it on the page
   async function generateQuote() {
@@ -63,3 +73,4 @@ async function getNewQuote() {
     shareQuote();
   });
   
+
