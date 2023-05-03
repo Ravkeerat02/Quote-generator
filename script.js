@@ -15,13 +15,43 @@ async function getNewQuote() {
   })
   .catch(error => console.error(error));
   
-  // Generate a new quote and display it on the page
+  /// Generate a new quote and display it on the page, along with a related image
   async function generateQuote() {
-    const { content, author } = await getNewQuote();
+    const { content, author, attribution } = await getNewQuote();
     document.getElementById("quote-text").textContent = content;
     document.getElementById("author-text").textContent = `- ${author}`;
-    document.getElementById("speak-quote-button").disabled = false;
+    document.getElementById("quote-attribution").textContent = attribution;
+  
+    // Set a default image as a placeholder
+    document.getElementById("generateQuoteImage").src = "https://via.placeholder.com/800x450.png?text=Quote+Image";
+  
+    // Fetch a random image based on the quote text
+    const imageResponse = await fetch(`https://api.unsplash.com/photos/random?query=${encodeURIComponent(content.trim())}&client_id=YOUR_ACCESS_KEY`);
+    const imageData = await imageResponse.json();
+  
+    // Update the image source after it has loaded
+    const img = document.getElementById("generateQuoteImage");
+    img.onload = function() {
+      img.alt = imageData.alt_description;
+      img.src = imageData.urls.regular;
+    };
   }
+
+// Fetch a random image related to the quote from the Unsplash API
+async function generateQuoteImage() {
+  const apiKey = '8epTFry073YeIxH3ZhVymSiOlJJMpIfxGvgaqyup2Ck'; // Replace with your Unsplash API access key
+  const apiUrl = `https://api.unsplash.com/photos/random?query=${keyword}&orientation=landscape&client_id=${apiKey}`;
+  const response = await fetch(apiUrl);
+  const data = await response.json();
+  return data.urls.regular;
+}
+
+// Refresh the image associated with the current quote
+async function refreshImage() {
+  const currentQuote = document.getElementById("quote-text").textContent;
+  const imageUrl = await generateQuoteImage(currentQuote);
+  document.getElementById("quote-image").src = imageUrl;
+}
   
   // Speak the current quote using the Web Speech API
   function speakQuote() {
@@ -45,10 +75,11 @@ async function getNewQuote() {
     document.getElementById("time").textContent = `Current time: ${timeString}`;
   }
   
-  // Add event listeners to buttons
-  document.getElementById("new-quote-button").addEventListener("click", generateQuote);
-  document.getElementById("speak-quote-button").addEventListener("click", speakQuote);
-  document.getElementById("share-quote-button").addEventListener("click", shareQuote);
+// Add event listeners to buttons
+document.getElementById("new-quote-button").addEventListener("click", generateQuote);
+document.getElementById("speak-quote-button").addEventListener("click", speakQuote);
+document.getElementById("share-quote-button").addEventListener("click", shareQuote);
+document.getElementById("refresh-button").addEventListener("click", refreshImage);
   
   // Generate an initial quote and display the current time
   generateQuote();
@@ -73,4 +104,3 @@ async function getNewQuote() {
     shareQuote();
   });
 
-  // clock 
