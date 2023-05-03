@@ -73,7 +73,10 @@
     color: #fff;
     padding: 10px;
     text-align: center; 
-   }
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
 
    .quote-of-the-day{
     background-color: #007bff;
