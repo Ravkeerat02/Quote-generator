@@ -61,12 +61,7 @@ async function getNewQuote() {
     quoteBox.classList.toggle("box-open");
   });
   
-  // Generate a new quote when clicking the refresh button
-  const refreshButton = document.getElementById("refresh-button");
-  refreshButton.addEventListener("click", function() {
-    generateQuote();
-  });
-  
+ 
   // Add event listener to the share button
   const shareButton = document.getElementById("share-button");
   shareButton.addEventListener("click", function() {
