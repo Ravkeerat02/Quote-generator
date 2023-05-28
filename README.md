@@ -1,8 +1,32 @@
-<h1>Displays new(random) quote </h1>
-<br>
+# Quote Generator
 
-https://youtu.be/aUPeASfr944
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Ravkeerat02/Quote-generator/blob/main/LICENSE)
 
+> A simple web application that generates random quotes.
 
-![Updating Quote](https://github.com/Ravkeerat02/Quote-generator/blob/master/ss/Screen%20Shot%202023-03-14%20at%203.16.25%20AM.png)
+The Quote Generator is a web application that allows users to generate random quotes with the click of a button. It's a fun and interactive way to get inspired or discover new quotes.
 
+![Screenshot](./screenshot.png)
+
+## Features
+
+- Randomly generates quotes with a click of a button.
+- Displays a new quote each time the button is clicked.
+- Supports sharing quotes on social media platforms.
+
+## Demo
+
+Check out the live demo of the Quote Generator: [Demo Link](https://ravkeerat02.github.io/Quote-generator/)
+
+## Installation
+
+1. Clone the repository:
+
+git clone https://github.com/Ravkeerat02/Quote-generator.git
+
+2. Open the `index.html` file in your web browser.
+
+## Usage
+
+- Click the "Generate Quote" button to generate a new random quote.
+- Click the "Share" button to share the quote on your favorite social media platform.

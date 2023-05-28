@@ -61,6 +61,7 @@ async function getNewQuote() {
     quoteBox.classList.toggle("box-open");
   });
   
+
   
   // Add event listener to the share button
   const shareButton = document.getElementById("share-button");
