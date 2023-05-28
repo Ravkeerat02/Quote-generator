@@ -1,8 +1,6 @@
 # Quote Generator
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Ravkeerat02/Quote-generator/blob/main/LICENSE)
-
-> A simple web application that generates random quotes.
+> A simple web application that generates random quotes with the option to speak as well as share it.
 
 The Quote Generator is a web application that allows users to generate random quotes with the click of a button. It's a fun and interactive way to get inspired or discover new quotes.
 
@@ -17,7 +15,7 @@ The Quote Generator is a web application that allows users to generate random qu
 
 ## Demo
 
-Check out the live demo of the Quote Generator: [Demo Link](https://quote-generator-eight-beta.vercel.app/)
+  Check out the live demo of the Quote Generator: [Demo Link](https://quote-generator-eight-beta.vercel.app/)
 
 ## Installation
 
