@@ -1,31 +1,70 @@
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <title>Quote</title>
-      <link rel="stylesheet" href="style.css">
-      <link rel="icon" href="ss/icon.jpg" >
-    </head>
-    <body>
-      <div id="quote-box">
-        <div id="quote-container">
-          <div id="quote-of-the-day"></div>
-        </div>
-        <div id="quote-container">
-          <p id="quote-text" class="fade-in"></p>
-          <p id="author-text"></p>
-        </div>
-        <div id="button-container">
-          <button id="speak-quote-button" class="btn">Speak Quote</button>
-          <button id="new-quote-button" class="btn">New Quote</button>
-          <button id="share-quote-button" class="btn">Share Quote</button>
-          <button id="translate-quote-button" class="btn">Translate Quote</button>
-        </div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quote</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="ss/icon.jpg">
+  </head>
+  <body>
+    <div id="quote-box">
+      <div id="quote-container">
+        <div id="quote-of-the-day"></div>
       </div>
-      <hr>
-      <footer class="foot">
-        <p id="time"></p>
-        <p>Copyright &copy; Ravkeerat Singh </p>
-      </footer>
-      <script src="script.js"></script>
-    </body>
-  </html>
+      <div id="quote-container">
+        <p id="quote-text" class="fade-in"></p>
+        <p id="author-text"></p>
+      </div>
+      <div id="button-container">
+        <button id="speak-quote-button" class="btn">Speak Quote</button>
+        <button id="new-quote-button" class="btn">New Quote</button>
+        <button id="share-quote-button" class="btn">Share Quote</button>
+        <select id="language-dropdown" class="btn">
+          <option value="fr">French</option>
+          <option value="es">Spanish</option>
+          <option value="de">German</option>
+          <!-- Add more options for other languages -->
+        </select>
+        <button id="translate-quote-button" class="btn" onclick="translateQuote()">Translate Quote</button>
+      </div>
+    </div>
+    <hr>
+    <footer class="foot">
+      <p id="time"></p>
+      <p>Copyright &copy; Ravkeerat Singh </p>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+      function translateQuote() {
+        const apiKey = 'AIzaSyCJyQ9COVSXpHDvjjMPQ3jVrcxeQ6fQitc';
+        const apiUrl = 'https://translation.googleapis.com/language/translate/v2';
+        const targetLanguage = document.getElementById('language-dropdown').value;
+
+        // Get the quote text to be translated
+        const quoteText = document.getElementById('quote-text').textContent;
+
+        // Send a POST request to the Google Translate API
+        fetch(`${apiUrl}?key=${apiKey}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            q: quoteText,
+            target: targetLanguage,
+          }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Extract the translated text from the API response
+            const translatedText = data.data.translations[0].translatedText;
+
+            // Update the quote text with the translated text
+            document.getElementById('quote-text').textContent = translatedText;
+          })
+          .catch(error => {
+            console.error('Translation error:', error);
+          });
+      }
+    </script>
+  </body>
+</html>

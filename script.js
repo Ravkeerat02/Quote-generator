@@ -44,6 +44,14 @@ async function getNewQuote() {
     const timeString = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     document.getElementById("time").textContent = `Current time: ${timeString}`;
   }
+
+  // Translate the current quote using the Google Translate API
+  // function translateQuote(quote) {
+  // }
+
+ 
+
+
   
   // Add event listeners to buttons
   document.getElementById("new-quote-button").addEventListener("click", generateQuote);
@@ -56,9 +64,10 @@ async function getNewQuote() {
   displayTime();
   setInterval(displayTime, 1000); // Update the time every second
   
-  
-  // Add event listener to the share button
-  const shareButton = document.getElementById("share-button");
-  shareButton.addEventListener("click", function() {
-    shareQuote();
+  // Display quote in a box
+  const quoteBox = document.getElementById("quote-box");
+  quoteBox.addEventListener("click", function() {
+    quoteBox.classList.toggle("box-open");
   });
+
+  
