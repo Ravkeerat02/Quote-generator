@@ -12,7 +12,6 @@ The Quote Generator is a web application that allows users to generate random qu
 
 
 ## Screenshot
-![Quote Generator](https://github.com/Ravkeerat02/Quote-generator/blob/master/ss/Updated.png)
 ![Translated Text](https://github.com/Ravkeerat02/Quote-generator/blob/master/ss/Finish.png)
 
 
