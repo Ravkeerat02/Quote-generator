@@ -23,12 +23,13 @@ async function getNewQuote() {
     document.getElementById("speak-quote-button").disabled = false;
   }
   
-  // Speak the current quote using the Web Speech API
+  // Speak the current quote using the Web Speech API . Is it possible to add the controlling speech feature
   function speakQuote() {
     const textToSpeak = `${document.getElementById("quote-text").textContent} by ${document.getElementById("author-text").textContent}`
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
     speechSynthesis.speak(utterance);
   }
+  
   
   // Share the current quote on Twitter
   function shareQuote() {
