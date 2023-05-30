@@ -45,19 +45,12 @@ async function getNewQuote() {
     document.getElementById("time").textContent = `Current time: ${timeString}`;
   }
 
-  // Translate the current quote using the Google Translate API
-  // function translateQuote(quote) {
-  // }
-
  
-
-
-  
   // Add event listeners to buttons
   document.getElementById("new-quote-button").addEventListener("click", generateQuote);
   document.getElementById("speak-quote-button").addEventListener("click", speakQuote);
   document.getElementById("share-quote-button").addEventListener("click", shareQuote);
-  document.getElementById("translate-quote-button").addEventListener("click",translateQuote);
+
   
   // Generate an initial quote and display the current time
   generateQuote();
