@@ -23,9 +23,6 @@
           <option value="it">Italian</option>
           <option value="ja">Japanese</option>
         </select>
-        <select id ="language-dropdown" class="btn">
-          <option value="en">English</option>
-        </select> 
       </div>
       </div>
       <div id="button-container">
@@ -33,7 +30,7 @@
         <button id="new-quote-button" class="btn">New Quote</button>
         <button id="share-quote-button" class="btn">Share Quote</button>
         <button id="translate-quote-button" class="btn" onclick="translateQuote()">Translate Quote</button>
-        <!-- <button id="translate-quote-button" class="btn" onclick="translateQuote()">Reset</button> -->
+        <button id="translate-quote-button" class="btn" onclick="resetQuote()">Reset</button>
       </div>
     </div>
     <hr>
@@ -73,6 +70,12 @@
           .catch(error => {
             console.error('Translation error:', error);
           });
+      }
+
+      function resetQuote(){
+        // convert translated text back to original(english)
+        document.getElementById('quote-text').textContent = document.getElementById('quote-text').textContent;
+        
       }
     </script>
   </body>
