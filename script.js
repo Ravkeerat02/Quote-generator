@@ -49,19 +49,13 @@ async function getNewQuote() {
   document.getElementById("new-quote-button").addEventListener("click", generateQuote);
   document.getElementById("speak-quote-button").addEventListener("click", speakQuote);
   document.getElementById("share-quote-button").addEventListener("click", shareQuote);
+  document.getElementById("translate-quote-button").addEventListener("click",translateQuote);
   
   // Generate an initial quote and display the current time
   generateQuote();
   displayTime();
   setInterval(displayTime, 1000); // Update the time every second
   
-  // Display quote in a box
-  const quoteBox = document.getElementById("quote-box");
-  quoteBox.addEventListener("click", function() {
-    quoteBox.classList.toggle("box-open");
-  });
-  
-
   
   // Add event listener to the share button
   const shareButton = document.getElementById("share-button");
