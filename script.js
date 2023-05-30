@@ -45,6 +45,41 @@ async function getNewQuote() {
     const timeString = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     document.getElementById("time").textContent = `Current time: ${timeString}`;
   }
+  function translateQuote() {
+    const apiKey = 'AIzaSyCJyQ9COVSXpHDvjjMPQ3jVrcxeQ6fQitc';
+    const apiUrl = 'https://translation.googleapis.com/language/translate/v2';
+    const targetLanguage = document.getElementById('language-dropdown').value;
+
+    // Get the quote text to be translated
+    const quoteText = document.getElementById('quote-text').textContent;
+
+    // Send a POST request to the Google Translate API
+    fetch(`${apiUrl}?key=${apiKey}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        q: quoteText,
+        target: targetLanguage,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Extract the translated text from the API response
+        const translatedText = data.data.translations[0].translatedText;
+
+        // Update the quote text with the translated text
+        document.getElementById('quote-text').textContent = translatedText;
+      })
+      .catch(error => {
+        console.error('Translation error:', error);
+      });
+  }
+
+  function resetQuote(){
+    document.getElementById('quote-text').textContent = " ";
+  }
 
  
   // Add event listeners to buttons
