@@ -7,7 +7,7 @@ The Quote Generator is a web application that allows users to generate random qu
 
 ## Demo
 
-  Check out the live demo of the Quote Generator: [Demo Link](https://quote-generator-eight-beta.vercel.app/)
+  Check out the live demo of the Quote Generator: [Demo Link](https://ravkeerat02.github.io/Quote-generator/)
 
 
 
